@@ -7,17 +7,21 @@ LDFLAGS = -m elf_i386 -T src/link.ld
 EMULATOR = qemu-system-i386
 EMULATOR_FLAGS = -kernel
 
+SRCS = src/kernel.asm src/kernel.c src/idt.c src/isr.c src/kb.c src/screen.c src/string.c src/system.c src/util.c
 OBJS = obj/kasm.o obj/kc.o obj/idt.o obj/isr.o obj/kb.o obj/screen.o obj/string.o obj/system.o obj/util.o 
 OUTPUT = iknow/boot/kernel.bin
 
-run: all
+run:link
 	$(EMULATOR) $(EMULATOR_FLAGS) $(OUTPUT)
 
-all:$(OBJS)
+link:compile $(OBJS)
 	rm -r -f iknow/
 	mkdir iknow/
 	mkdir iknow/boot/
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
+	
+compile:$(SRCS) 
+	mkdir obj/
 
 obj/kasm.o:src/kernel.asm
 	$(ASSEMBLER) $(ASFLAGS) -o obj/kasm.o src/kernel.asm
@@ -45,6 +49,7 @@ obj/system.o:src/system.c
 
 obj/util.o:src/util.c
 	$(COMPILER) $(CFLAGS) src/util.c -o obj/util.o
+
 
 build:all
 	#Activate the install xorr if you do not have it already installed
