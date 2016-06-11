@@ -21,6 +21,7 @@ link:compile $(OBJS)
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
 	
 compile:$(SRCS) 
+	rm obj/ -r -f
 	mkdir obj/
 
 obj/kasm.o:src/kernel.asm
