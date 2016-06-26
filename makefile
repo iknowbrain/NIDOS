@@ -7,22 +7,16 @@ LDFLAGS = -m elf_i386 -T src/link.ld
 EMULATOR = qemu-system-i386
 EMULATOR_FLAGS = -kernel
 
-SRCS = src/kernel.asm src/kernel.c src/idt.c src/isr.c src/kb.c src/screen.c src/string.c src/system.c src/util.c
-OBJS = obj/kasm.o obj/kc.o obj/idt.o obj/isr.o obj/kb.o obj/screen.o obj/string.o obj/system.o obj/util.o 
+OBJS = obj/kasm.o obj/kc.o obj/idt.o obj/isr.o obj/kb.o obj/screen.o obj/string.o obj/system.o obj/util.o obj/shell.o
 OUTPUT = iknow/boot/kernel.bin
 
-run:link
+run: all
 	$(EMULATOR) $(EMULATOR_FLAGS) $(OUTPUT)
 
-link:compile $(OBJS)
-	rm -r -f iknow/
-	mkdir iknow/
-	mkdir iknow/boot/
+all:$(OBJS)
+	mkdir iknow/ -p
+	mkdir iknow/boot/ -p
 	$(LINKER) $(LDFLAGS) -o $(OUTPUT) $(OBJS)
-	
-compile:$(SRCS) 
-	rm obj/ -r -f
-	mkdir obj/
 
 obj/kasm.o:src/kernel.asm
 	$(ASSEMBLER) $(ASFLAGS) -o obj/kasm.o src/kernel.asm
@@ -50,7 +44,9 @@ obj/system.o:src/system.c
 
 obj/util.o:src/util.c
 	$(COMPILER) $(CFLAGS) src/util.c -o obj/util.o
-
+	
+obj/shell.o:src/shell.c
+	$(COMPILER) $(CFLAGS) src/shell.c -o obj/shell.o
 
 build:all
 	#Activate the install xorr if you do not have it already installed
@@ -67,6 +63,6 @@ build:all
 	grub-mkrescue -o iknow.iso iknow/
 	
 clear:
-	rm -f obj/*
+	rm -f obj/*.o
 	rm -r -f iknow/
 	
