@@ -1,6 +1,10 @@
-You can visit The Video tutorial Linked to this archive at https://www.youtube.com/watch?v=CGkmfBHEODE
-This Archive has been uploaded by Nidhal Abidi From IKOW
-Please visit Iknow @ www.youtube.com/iknowbrain
-or at:
-www.iknowbrain.work
-Thank you for your support :)
+سلام
+
+سامانه عامل از ابتدا، سامانه ای آزمایشی و آموزشی است که نوشتن سامانه عامل از ابتدا را به شما می آموزد.
+
+شما می توانید راهنمای ویدیویی این سامانه عامل را از نشانی زیر مشاهده کنید
+ http://www.aparat.ir/v/mtKEP
+ 
+You can visit The Video tutorial Linked to this archive at http://www.aparat.ir/v/mtKEP
+
+
